@@ -24,7 +24,7 @@ function buildTimeline() {
   if (!scene) return timeline
   const { bowl, fries, momos, garnish } = scene
 
-  gsap.set('#logoK', { opacity: 0, y: 90 })
+  gsap.set('#logoK', { opacity: 0, y: 170 })
   gsap.set(foodCanvas, { scale: BIG_SCALE })
 
   timeline
@@ -67,11 +67,11 @@ function buildTimeline() {
     timeline.to(g.scale, { x: s, y: s, z: s, duration: 0.5, ease: 'back.out(2)' }, `merge+=${0.1 + i * 0.045}`)
   })
 
-  // "K forms": the letterform slides up from below while the dish shrinks down to nest inside it
+  // "K forms": the letterform slides up from below; the dish lingers, then eases down to nest inside it
   timeline
     .addLabel('kForms', '>-0.1')
-    .to('#logoK', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, 'kForms')
-    .to(foodCanvas, { scale: 1, duration: 1.0, ease: 'power3.inOut' }, 'kForms')
+    .to('#logoK', { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 'kForms')
+    .to(foodCanvas, { scale: 1, duration: 2.2, ease: 'power2.inOut' }, 'kForms+=0.15')
 
     .addLabel('textAppears', '>-0.2')
     .from('#titleWord span', { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out', stagger: 0.035 }, 'textAppears')
