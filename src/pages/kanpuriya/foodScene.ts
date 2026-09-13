@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
 export interface FoodScene {
   bowl: THREE.Object3D
@@ -52,23 +51,23 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
 
   const scene = new THREE.Scene()
 
-  const pmrem = new THREE.PMREMGenerator(renderer)
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
-  scene.environmentIntensity = 0.4
-
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
   camera.position.set(0.5, 1.25, 2.9)
   camera.lookAt(0.02, 0.15, 0)
 
-  const key = new THREE.DirectionalLight('#ffcf9c', 1.5)
+  const key = new THREE.DirectionalLight('#ffcf9c', 1.7)
   key.position.set(-3, 5, 4)
   scene.add(key)
 
-  const rimLight = new THREE.DirectionalLight('#ffb870', 0.95)
+  const rimLight = new THREE.DirectionalLight('#ffb870', 1.15)
   rimLight.position.set(3, 2, -4)
   scene.add(rimLight)
 
-  const fill = new THREE.HemisphereLight('#5a4632', '#0c0705', 0.4)
+  const fillLight = new THREE.DirectionalLight('#c9a06a', 0.45)
+  fillLight.position.set(-1, 1, -3)
+  scene.add(fillLight)
+
+  const fill = new THREE.HemisphereLight('#7a5c3c', '#0c0705', 0.55)
   scene.add(fill)
 
   const shadowTex = makeSoftSprite('rgba(0,0,0,0.5)', 'rgba(0,0,0,0.25)', 0.3)
@@ -81,6 +80,11 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
   const rig = new THREE.Group()
   scene.add(rig)
 
+  // separate group so the whole dish can scale/reposition (big hero -> nested in the K)
+  // independently of the pointer-driven rotation applied to `rig`
+  const foodGroup = new THREE.Group()
+  rig.add(foodGroup)
+
   const [bowlGeo, fryGeo, momoGeo, leafGeo] = await Promise.all([
     loadGeometry('/models/bowl.glb'),
     loadGeometry('/models/fries.glb'),
@@ -91,14 +95,15 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
   // --- bowl ---
   const bowlMat = new THREE.MeshPhysicalMaterial({
     color: '#b5601f',
-    roughness: 0.35,
-    metalness: 0.5,
-    clearcoat: 0.45,
-    clearcoatRoughness: 0.3,
+    roughness: 0.48,
+    metalness: 0.4,
+    clearcoat: 0.3,
+    clearcoatRoughness: 0.4,
   })
   const bowl = new THREE.Mesh(bowlGeo, bowlMat)
   bowl.scale.setScalar(1.0)
-  rig.add(bowl)
+  bowl.rotation.y = Math.PI
+  foodGroup.add(bowl)
 
   // --- fries: clone the single fry model into a served pile ---
   const fryMat = new THREE.MeshStandardMaterial({ color: '#e2a24e', roughness: 0.65, metalness: 0.02 })
@@ -119,7 +124,7 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
     wrap.scale.setScalar(FRY_SCALE)
     wrap.position.set(spec.x, spec.y, spec.z)
     wrap.rotation.set(spec.rotX, spec.rotY, spec.rotZ)
-    rig.add(wrap)
+    foodGroup.add(wrap)
     return wrap
   })
 
@@ -144,7 +149,7 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
     wrap.scale.setScalar(MOMO_SCALE * spec.s)
     wrap.position.set(spec.x, spec.y, spec.z)
     wrap.rotation.y = spec.rotY
-    rig.add(wrap)
+    foodGroup.add(wrap)
     return wrap
   })
 
@@ -167,7 +172,7 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
     wrap.scale.setScalar(0.001)
     wrap.position.set(spec.x, spec.y, spec.z)
     wrap.rotation.y = Math.random() * Math.PI * 2
-    rig.add(wrap)
+    foodGroup.add(wrap)
     return wrap
   })
 
@@ -181,7 +186,7 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
     speck.position.set(Math.cos(a) * r, 0.35 + Math.random() * 0.2, Math.sin(a) * r)
     speck.userData.restScale = 1
     speck.scale.setScalar(0.001)
-    rig.add(speck)
+    foodGroup.add(speck)
     garnish.push(speck)
   }
 
@@ -195,7 +200,7 @@ export async function createFoodScene(canvas: HTMLCanvasElement): Promise<FoodSc
     sprite.userData.baseY = sprite.position.y
     sprite.userData.speed = 0.25 + Math.random() * 0.25
     sprite.userData.drift = Math.random() * Math.PI * 2
-    rig.add(sprite)
+    foodGroup.add(sprite)
     steam.push(sprite)
   }
 

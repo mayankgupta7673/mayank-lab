@@ -1,19 +1,14 @@
 export const markup = /* html */ `
 <section class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
-    <div class="bokeh bokeh--amber"></div>
-    <div class="bokeh bokeh--green"></div>
-    <div class="bokeh bokeh--rust"></div>
+    <div class="prop prop--mill"></div>
+    <div class="prop prop--herb-tl"></div>
+    <div class="prop prop--herb-tr"></div>
+    <div class="prop prop--bowl-br"></div>
+    <div class="prop prop--herb-br"></div>
+    <div class="table-edge"></div>
     <div class="spotlight"></div>
-    <svg class="grain" aria-hidden="true">
-      <filter id="grainFilter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#grainFilter)" />
-    </svg>
     <div class="vignette"></div>
-    <div class="floor"></div>
   </div>
 
   <div class="hero__stage" id="stage">
@@ -25,26 +20,20 @@ export const markup = /* html */ `
         aria-label="Kanpuriya Chatkara logo — a letter K formed with a bowl of momos and fries"
       >
         <defs>
-          <linearGradient id="kGradient" x1="0" y1="0" x2="0.15" y2="1">
-            <stop offset="0" stop-color="#fbf3e0" />
-            <stop offset="0.55" stop-color="#efe0bd" />
-            <stop offset="1" stop-color="#d8c393" />
+          <linearGradient id="kGradient" x1="0" y1="0" x2="0.18" y2="1">
+            <stop offset="0" stop-color="#fdf6e6" />
+            <stop offset="0.5" stop-color="#eeddb0" />
+            <stop offset="1" stop-color="#caa259" />
           </linearGradient>
 
           <filter id="dropShadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity="0.45" />
+            <feDropShadow dx="7" dy="13" stdDeviation="11" flood-color="#000" flood-opacity="0.5" />
           </filter>
-
-          <clipPath id="kReveal">
-            <rect id="kRevealRect" x="0" y="0" width="0" height="460" />
-          </clipPath>
         </defs>
 
         <!-- K letterform -->
         <g id="logoK" filter="url(#dropShadow)">
-          <g clip-path="url(#kReveal)">
-            <text x="6" y="372" font-family="'Playfair Display', serif" font-weight="900" font-size="360" fill="url(#kGradient)">K</text>
-          </g>
+          <text x="6" y="372" font-family="'Playfair Display', serif" font-weight="900" font-size="360" fill="url(#kGradient)">K</text>
         </g>
       </svg>
 
@@ -67,14 +56,5 @@ export const markup = /* html */ `
       Replay
     </button>
   </div>
-
-  <div class="scroll-cue" id="scrollCue" aria-hidden="true">
-    <span class="scroll-cue__dot"></span>
-    Scroll
-  </div>
 </section>
-
-<footer class="credit">
-  <p>Brand animation crafted by <a href="https://mayankcloud.com" target="_blank" rel="noopener">Mayank Gupta</a> — momos &amp; fries, done right.</p>
-</footer>
 `

@@ -21,7 +21,7 @@ async function hideSteam(page) {
 
 // 1) transparent logo mark, high-res
 {
-  const page = await browser.newPage({ viewport: { width: 1100, height: 1000 }, deviceScaleFactor: 3 })
+  const page = await browser.newPage({ viewport: { width: 1000, height: 900 }, deviceScaleFactor: 2 })
   await page.goto(url, { waitUntil: 'networkidle' })
   await page.waitForTimeout(4800)
   await hideSteam(page)
@@ -31,9 +31,7 @@ async function hideSteam(page) {
     const bg = document.querySelector('.hero__bg')
     const wordmark = document.querySelector('.wordmark')
     const replay = document.querySelector('.replay-btn')
-    const cue = document.querySelector('.scroll-cue')
-    const footer = document.querySelector('.credit')
-    ;[bg, wordmark, replay, cue, footer].forEach((el) => el && el.remove())
+    ;[bg, wordmark, replay].forEach((el) => el && el.remove())
     document.querySelectorAll('.hero, .hero__stage, #app').forEach((el) => {
       el.style.background = 'transparent'
       el.style.minHeight = '0'
@@ -44,7 +42,7 @@ async function hideSteam(page) {
       el.style.padding = '80px'
     })
     const wrap = document.querySelector('.logo-wrap')
-    wrap.style.width = '820px'
+    wrap.style.width = '600px'
     wrap.style.margin = '0'
   })
   await page.waitForTimeout(150)
@@ -72,9 +70,7 @@ async function hideSteam(page) {
   await hideSteam(page)
   await page.evaluate(() => {
     const replay = document.querySelector('.replay-btn')
-    const cue = document.querySelector('.scroll-cue')
-    const footer = document.querySelector('.credit')
-    ;[replay, cue, footer].forEach((el) => el && el.remove())
+    replay?.remove()
     document.querySelector('.hero').style.minHeight = '900px'
   })
   await page.screenshot({ path: `${outDir}/kanpuriya-chatkara-banner.png` })
@@ -89,9 +85,7 @@ async function hideSteam(page) {
   await hideSteam(page)
   await page.evaluate(() => {
     const replay = document.querySelector('.replay-btn')
-    const cue = document.querySelector('.scroll-cue')
-    const footer = document.querySelector('.credit')
-    ;[replay, cue, footer].forEach((el) => el && el.remove())
+    replay?.remove()
     document.querySelector('.hero').style.minHeight = '1200px'
   })
   await page.screenshot({ path: `${outDir}/kanpuriya-chatkara-square.png` })
