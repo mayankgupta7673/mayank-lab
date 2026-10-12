@@ -16,6 +16,10 @@ dist-ssr
 .wrangler
 .dev.vars*
 
+# Claude Design seeded canvas output (large editor payload baked in — keep the .dc.html source instead)
+.design-work/**/*.html
+!.design-work/**/*.dc.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

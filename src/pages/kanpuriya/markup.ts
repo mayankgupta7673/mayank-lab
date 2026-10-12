@@ -15,25 +15,33 @@ export const markup = /* html */ `
     <div class="logo-wrap" id="logoWrap">
       <svg
         id="logo"
-        viewBox="0 0 560 460"
+        viewBox="0 0 500 460"
         role="img"
-        aria-label="Kanpuriya Chatkara logo — a letter K formed with a bowl of momos and fries"
+        aria-label="Kanpuriya Chatkara logo — a curvy letter K cradling a bowl of momos and fries"
       >
         <defs>
-          <linearGradient id="kGradient" x1="0" y1="0" x2="0.18" y2="1">
+          <linearGradient id="kGradient" x1="0" y1="0" x2="0.2" y2="1">
             <stop offset="0" stop-color="#fdf6e6" />
             <stop offset="0.5" stop-color="#eeddb0" />
             <stop offset="1" stop-color="#caa259" />
           </linearGradient>
 
           <filter id="dropShadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="7" dy="13" stdDeviation="11" flood-color="#000" flood-opacity="0.5" />
+            <feDropShadow dx="7" dy="12" stdDeviation="10" flood-color="#000" flood-opacity="0.5" />
           </filter>
         </defs>
 
-        <!-- K letterform -->
+        <!-- K letterform: bold stem + two sweeping brush-stroke arms, the lower one hooking into a cradle for the bowl -->
         <g id="logoK" filter="url(#dropShadow)">
-          <text x="6" y="372" font-family="'Playfair Display', serif" font-weight="900" font-size="360" fill="url(#kGradient)">K</text>
+          <rect x="70" y="16" width="95" height="427" rx="16" fill="url(#kGradient)" />
+          <path d="M 120,212 C 200,187 320,115 440,26" stroke="url(#kGradient)" stroke-width="58" fill="none" stroke-linecap="round" />
+          <path
+            d="M 120,248 C 220,276 330,263 400,322 C 432,352 436,381 408,406 C 392,420 368,423 348,413"
+            stroke="url(#kGradient)"
+            stroke-width="58"
+            fill="none"
+            stroke-linecap="round"
+          />
         </g>
       </svg>
 

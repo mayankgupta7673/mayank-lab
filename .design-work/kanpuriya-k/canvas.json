@@ -1,0 +1,11 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 500, "h": 600 },
+    { "file": "DirectionB.dc.html", "x": 580, "y": 0, "w": 500, "h": 600 },
+    { "file": "DirectionC.dc.html", "x": 1160, "y": 0, "w": 500, "h": 600 }
+  ],
+  "annotations": [
+    { "id": "brief-note", "x": 0, "y": -110, "w": 1660, "text": "Kanpuriya Chatkara — curvy K logotype directions. Main: bold stem, sweeping arms. Direction B: lighter ribbon. Direction C: angular near the stem, curls at the tips. The lower-right hook is where the 3D bowl nests." }
+  ],
+  "launch": { "view": "canvas" }
+}

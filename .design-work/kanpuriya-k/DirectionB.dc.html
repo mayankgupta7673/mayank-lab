@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; }
+    a { color: #caa259; } a:hover { color: #eecd8d; }
+  </style>
+</helmet>
+<div style="width: 100%; height: 100%; background: #0c0705; display: flex; align-items: center; justify-content: center;">
+  <svg width="420" height="470" viewBox="0 0 500 560" style="overflow: visible;">
+    <defs>
+      <linearGradient id="kGradB" x1="0" y1="0" x2="0.2" y2="1">
+        <stop offset="0" stop-color="#fdf6e6" />
+        <stop offset="0.5" stop-color="#eeddb0" />
+        <stop offset="1" stop-color="#caa259" />
+      </linearGradient>
+      <filter id="dropShadowB" x="-40%" y="-40%" width="180%" height="180%">
+        <feDropShadow dx="7" dy="12" stdDeviation="10" flood-color="#000" flood-opacity="0.5" />
+      </filter>
+    </defs>
+    <g filter="url(#dropShadowB)">
+      <rect x="78" y="20" width="80" height="520" rx="14" fill="url(#kGradB)" />
+      <path d="M 118,250 C 210,210 330,120 445,28" stroke="url(#kGradB)" stroke-width="44" fill="none" stroke-linecap="round" />
+      <path d="M 118,310 C 230,350 350,340 415,420 C 448,460 448,498 415,524 C 396,539 370,540 350,528"
+        stroke="url(#kGradB)" stroke-width="44" fill="none" stroke-linecap="round" />
+    </g>
+  </svg>
+</div>
+</x-dc>
+</body>
+</html>
